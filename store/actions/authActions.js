@@ -34,3 +34,33 @@ export const signup = (newUser, navigation) => {
 		}
 	};
 };
+export const signout = () => {
+	return async (dispatch) => {
+		try {
+			AsyncStorage.removeItem('myToken');
+			const token = AsyncStorage.getItem('myToken');
+			delete instance.defaults.headers.common.Authorization;
+			dispatch({
+				type: types.SET_USER,
+				payload: null,
+			});
+			console.error('doooone');
+		} catch (error) {
+			console.error(error);
+		}
+	};
+};
+export const checkForToken = () => async (dispatch) => {
+	const token = await AsyncStorage.getItem('myToken');
+	if (token) {
+		const user = decode(token);
+		if (Date.now() < user.exp) {
+			dispatch({
+				type: types.SET_USER,
+				payload: user,
+			});
+		} else {
+			AsyncStorage.removeItem('myToken');
+		}
+	}
+};
