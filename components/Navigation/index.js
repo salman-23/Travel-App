@@ -3,14 +3,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../Home';
 import Signin from '../authentication/Signin';
 import Signup from '../authentication/Signup';
-
+import Logout from '../buttons/Logout';
 const RootNavigator = () => {
 	const { Navigator, Screen } = createStackNavigator();
 
 	return (
 		<>
 			<Navigator
-				initialRouteName="Signin"
+				initialRouteName="Home"
 				screenOptions={{
 					headerTintColor: 'white',
 					headerStyle: {
@@ -18,7 +18,17 @@ const RootNavigator = () => {
 					},
 				}}
 			>
-				<Screen name="Home" component={Home} options={{ headerShown: false }} />
+				<Screen
+					name="Home"
+					component={Home}
+					options={{
+						headerTintColor: 'black',
+						headerStyle: {
+							backgroundColor: '#A9BAD6',
+						},
+						headerRight: () => <Logout />,
+					}}
+				/>
 				<Screen
 					name="Signin"
 					component={Signin}
