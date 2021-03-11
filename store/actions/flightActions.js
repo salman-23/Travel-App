@@ -7,7 +7,6 @@ export const searchFlight = (filter, navigation) => {
     try {
       filter = {
         ...filter,
-        arrivalDate: filter.arrivalDate.split("/").reverse().join("-"),
         departureDate: filter.departureDate.split("/").reverse().join("-"),
       };
       console.log(filter);
