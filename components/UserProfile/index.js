@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spinner } from 'native-base';
+import { Spinner, Button, Icon } from 'native-base';
 import { useSelector } from 'react-redux';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
@@ -25,6 +25,10 @@ const UserProfile = ({ navigation }) => {
 					</Text>
 					<Text style={styles.userInfo}>{profile.email} </Text>
 					<Text style={styles.userInfo}>Florida </Text>
+					<Button iconLeft light onPress={() => navigation.navigate('Signup')}>
+						<Icon name="cog" />
+						<Text>Edit </Text>
+					</Button>
 				</View>
 			</View>
 
