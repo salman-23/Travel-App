@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import UserProfile from '../UserProfile';
 import Home from '../Home';
 import Signin from '../authentication/Signin';
 import Signup from '../authentication/Signup';
@@ -38,6 +39,18 @@ const RootNavigator = () => {
 					name="Signup"
 					component={Signup}
 					options={{ headerShown: false }}
+				/>
+
+				<Screen
+					name="UserProfile"
+					component={UserProfile}
+					options={{
+						headerTintColor: 'black',
+						headerStyle: {
+							backgroundColor: '#A9BAD6',
+						},
+						headerRight: () => <Logout />,
+					}}
 				/>
 			</Navigator>
 		</>
