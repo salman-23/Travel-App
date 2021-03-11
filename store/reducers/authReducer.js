@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				profile: action.payload,
-				loading: false,
+				loading: action.payload == null ? true : false,
 			};
 		case UPDATE_PROFILE:
 			const updatedProfile = action.payload;

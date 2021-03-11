@@ -41,7 +41,7 @@ export const singout = () => {
 			const token = AsyncStorage.getItem('myToken');
 			delete instance.defaults.headers.common.Authorization;
 			dispatch({
-				type: types.SET_USER,
+				type: (types.SET_USER, types.FETCH_PROFILE),
 				payload: null,
 			});
 		} catch (error) {
@@ -76,7 +76,7 @@ export const profile = (userId) => async (dispatch) => {
 	}
 };
 
-export const updateProfile = (user) => async (dispatch) => {
+export const updateProfile = (user, navigation) => async (dispatch) => {
 	try {
 		await instance.put(`/user/Updateprofile`, user);
 		console.log(user);
@@ -84,6 +84,7 @@ export const updateProfile = (user) => async (dispatch) => {
 			type: types.UPDATE_PROFILE,
 			payload: user,
 		});
+		navigation.navigate('UserProfile');
 	} catch (error) {
 		console.log('ERROR: ', error);
 	}
