@@ -11,7 +11,7 @@ import {
   Icon,
   Thumbnail,
 } from "native-base";
-import { FlightItemStyled, ThumbnailStyled } from "./styles";
+import { ThumbnailStyled } from "./styles";
 
 const FlightItem = ({ flight }) => {
   const dispatch = useDispatch();
