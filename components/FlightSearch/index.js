@@ -2,6 +2,7 @@ import React from "react";
 import { TextInput } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+//Styling
 import {
   Content,
   Text,
@@ -13,13 +14,14 @@ import {
   Body,
   ListItem,
 } from "native-base";
-import DateSelector from "./DatePicker";
 import { StyledContainer } from "./styles";
+//Components
+import DateSelector from "./DatePicker";
 import Loading from "../Loading";
 import AirportPicker from "./AirportPicker";
 import { searchFlight } from "../../store/actions/flightActions";
 
-const FlightSearch = () => {
+const FlightSearch = ({ navigation }) => {
   const { destinations, destinationLoading } = useSelector(
     (state) => state.destinationReducer
   );
@@ -35,13 +37,12 @@ const FlightSearch = () => {
   if (destinationLoading) return <Loading />;
   const pickerItems = destinations.map((destination) => (
     <Picker.Item
-      label={`${destination.location} (${destination.airport})`}
-      value={destination.airport}
+      label={`${destination.city} (${destination.code} - ${destination.airport})`}
+      value={destination.id}
     />
   ));
   const handleSubmit = () => {
-    dispatch(searchFlight(filter));
-    console.log(filter);
+    dispatch(searchFlight(filter, navigation));
   };
   return (
     <StyledContainer>

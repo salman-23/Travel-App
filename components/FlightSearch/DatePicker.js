@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import DatePicker from "react-native-datepicker";
 const DateSelector = ({ filter, setFilter, type }) => {
   return (

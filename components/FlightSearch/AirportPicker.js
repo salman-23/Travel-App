@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { Picker, Icon } from "native-base";
 const AirportPicker = ({ filter, setFilter, items, type }) => {
   return (

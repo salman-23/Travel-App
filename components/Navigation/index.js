@@ -5,6 +5,7 @@ import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
 import Logout from "../buttons/Logout";
 import FlightSearch from "../FlightSearch";
+import FlightList from "../FlightList";
 
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
@@ -32,6 +33,7 @@ const RootNavigator = () => {
           }}
         />
         <Screen name="FlightSearch" component={FlightSearch} />
+        <Screen name="FlightList" component={FlightList} />
         <Screen
           name="Signin"
           component={Signin}
