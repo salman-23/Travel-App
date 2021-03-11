@@ -1,6 +1,7 @@
-import React from "react";
-import { View, Text } from "react-native";
-
+import React from 'react';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+//Styling
 import {
   HomeBackground,
   TopStyling,
@@ -8,9 +9,34 @@ import {
   BottomStyling,
   ButtonStyled,
 } from "./styles";
+//Components
+import { profile } from '../../store/actions/authActions';
 
 const Home = ({ navigation }) => {
-  return (
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.authReducer.user);
+	const handlePress = () => {
+		if (user) {
+			dispatch(profile());
+			navigation.navigate('UserProfile');
+		} else {
+			Alert.alert(
+				'Signin',
+				'You need to sign in before checkout',
+				[
+					{
+						text: 'Cancel',
+						onPress: () => console.log('Cancel Pressed'),
+						style: 'cancel',
+					},
+					{ text: 'Signin', onPress: () => navigation.navigate('Signin') },
+				],
+				{ cancelable: false }
+			);
+		}
+	};
+
+return (
     <HomeBackground
       source={{
         uri:

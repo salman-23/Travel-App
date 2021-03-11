@@ -13,7 +13,7 @@ const setUser = (token) => {
 export const signin = (user, navigation) => {
 	return async (dispatch) => {
 		try {
-			const res = await instance.post('/signin', user);
+			const res = await instance.post('user/signin', user);
 			dispatch(setUser(res.data.token));
 			navigation.navigate('Home');
 		} catch (error) {
@@ -25,7 +25,7 @@ export const signin = (user, navigation) => {
 export const signup = (newUser, navigation) => {
 	return async (dispatch) => {
 		try {
-			const res = await instance.post('/signup', newUser);
+			const res = await instance.post('/user/signup', newUser);
 			dispatch(setUser(res.data.token));
 			console.error(res.data.token);
 			navigation.navigate('Home');
@@ -34,17 +34,16 @@ export const signup = (newUser, navigation) => {
 		}
 	};
 };
-export const signout = () => {
+export const singout = () => {
 	return async (dispatch) => {
 		try {
 			AsyncStorage.removeItem('myToken');
 			const token = AsyncStorage.getItem('myToken');
 			delete instance.defaults.headers.common.Authorization;
 			dispatch({
-				type: types.SET_USER,
+				type: (types.SET_USER, types.FETCH_PROFILE),
 				payload: null,
 			});
-			console.error('doooone');
 		} catch (error) {
 			console.error(error);
 		}
@@ -62,5 +61,31 @@ export const checkForToken = () => async (dispatch) => {
 		} else {
 			AsyncStorage.removeItem('myToken');
 		}
+	}
+};
+
+export const profile = (userId) => async (dispatch) => {
+	try {
+		const res = await instance.get(`/user/myprofile`);
+		dispatch({
+			type: types.FETCH_PROFILE,
+			payload: res.data,
+		});
+	} catch (error) {
+		console.log('ERROR: ', error);
+	}
+};
+
+export const updateProfile = (user, navigation) => async (dispatch) => {
+	try {
+		await instance.put(`/user/Updateprofile`, user);
+		console.log(user);
+		dispatch({
+			type: types.UPDATE_PROFILE,
+			payload: user,
+		});
+		navigation.navigate('UserProfile');
+	} catch (error) {
+		console.log('ERROR: ', error);
 	}
 };
