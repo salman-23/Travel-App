@@ -46,8 +46,7 @@ const FlightItem = ({ flight }) => {
           </Text>
           <Text note>
             <Icon type="feather" name="calendar" />{" "}
-            {stringDate(flight.departureDate)} -{" "}
-            {stringDate(flight.arrivalDate)}{" "}
+            {stringDate(flight.departureDate)}
           </Text>
           <Text note>
             <Icon type="MaterialCommunityIcons" name="airplane" />

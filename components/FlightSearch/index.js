@@ -28,7 +28,6 @@ const FlightSearch = ({ navigation }) => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({
     departureDate: "",
-    arrivalDate: "",
     passangers: "",
     departureAirport: "",
     arrivalAirport: "",
@@ -54,14 +53,6 @@ const FlightSearch = ({ navigation }) => {
           filter={filter}
           setFilter={setFilter}
           type="departureDate"
-        />
-        <Text>
-          <Icon type="MaterialIcons" name="flight-land" /> Arrival Date
-        </Text>
-        <DateSelector
-          filter={filter}
-          setFilter={setFilter}
-          type="arrivalDate"
         />
         <Form>
           <Text>
