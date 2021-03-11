@@ -5,10 +5,13 @@ import Home from '../Home';
 import Signin from '../authentication/Signin';
 import Signup from '../authentication/Signup';
 import Logout from '../buttons/Logout';
-const RootNavigator = () => {
-	const { Navigator, Screen } = createStackNavigator();
+import FlightSearch from "../FlightSearch";
+import FlightList from "../FlightList";
 
-	return (
+const RootNavigator = () => {
+  const { Navigator, Screen } = createStackNavigator();
+
+  return (
 		<>
 			<Navigator
 				initialRouteName="Home"
@@ -30,6 +33,8 @@ const RootNavigator = () => {
 						headerRight: () => <Logout />,
 					}}
 				/>
+        <Screen name="FlightSearch" component={FlightSearch} />
+        <Screen name="FlightList" component={FlightList} />
 				<Screen
 					name="Signin"
 					component={Signin}
