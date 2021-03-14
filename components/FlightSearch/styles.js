@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
-import DatePicker from "react-native-datepicker";
-import { Container } from "native-base";
+import { Container, Text } from "native-base";
 
 export const StyledContainer = styled(Container)`
   flex: 1;
@@ -11,4 +10,8 @@ export const StyledContainer = styled(Container)`
   padding-right: 60px;
   padding-left: 60px;
   margin-top: 40px;
+`;
+
+export const ButtonTextStyled = styled(Text)`
+  margin: auto;
 `;

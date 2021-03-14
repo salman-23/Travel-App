@@ -9,9 +9,15 @@ const DateSelector = ({ filter, setFilter, type }) => {
       }}
       date={filter[type]}
       mode="date"
-      placeholder="Select Departure Date"
+      placeholder={`Select ${
+        type === "departureDate" ? "Departure Date" : "Return Date"
+      }`}
       format="DD/MM/YYYY"
-      minDate={new Date().toJSON().slice(0, 10).split("-").reverse().join("-")}
+      minDate={
+        type === "departureDate" || !filter.departureDate
+          ? new Date()
+          : filter.departureDate
+      }
       confirmBtnText="Confirm"
       cancelBtnText="Cancel"
       customStyles={{
