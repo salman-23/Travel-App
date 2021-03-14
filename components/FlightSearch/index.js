@@ -14,7 +14,7 @@ import {
   Body,
   ListItem,
 } from "native-base";
-import { StyledContainer } from "./styles";
+import { ButtonTextStyled, StyledContainer } from "./styles";
 //Components
 import DateSelector from "./DatePicker";
 import Loading from "../Loading";
@@ -29,11 +29,14 @@ const FlightSearch = ({ navigation }) => {
   const [filter, setFilter] = useState({
     departureDate: "",
     passangers: "",
-    departureAirport: "",
-    arrivalAirport: "",
+    departureAirport: 1,
+    arrivalAirport: 3,
     roundtrip: false,
+    returnDate: null,
   });
+
   if (destinationLoading) return <Loading />;
+
   const pickerItems = destinations.map((destination) => (
     <Picker.Item
       label={`${destination.city} (${destination.code} - ${destination.airport})`}
@@ -54,6 +57,18 @@ const FlightSearch = ({ navigation }) => {
           setFilter={setFilter}
           type="departureDate"
         />
+        {filter.roundtrip && (
+          <>
+            <Text>
+              <Icon type="MaterialIcons" name="flight-land" /> Return Date
+            </Text>
+            <DateSelector
+              filter={filter}
+              setFilter={setFilter}
+              type="returnDate"
+            />
+          </>
+        )}
         <Form>
           <Text>
             <Icon type="MaterialIcons" name="flight-takeoff" /> Departure
@@ -96,9 +111,9 @@ const FlightSearch = ({ navigation }) => {
           </Body>
         </ListItem>
         <Button onPress={handleSubmit}>
-          <Text>
+          <ButtonTextStyled>
             <Icon type="AntDesign" name="search1" /> Search Flights
-          </Text>
+          </ButtonTextStyled>
         </Button>
       </Content>
     </StyledContainer>

@@ -1,16 +1,18 @@
-import { SEARCH_FLIGHT } from "../actions/types";
+import { FETCH_FLIGHTS } from "../actions/types";
 
 const initialState = {
   flights: [],
+  returnFlights: [],
   loading: true,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH_FLIGHT:
+    case FETCH_FLIGHTS:
       return {
         ...state,
-        flights: action.payload,
+        flights: action.payload.flights,
+        returnFlights: action.payload.returnFlights,
         loading: false,
       };
     default:

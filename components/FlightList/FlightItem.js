@@ -1,19 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 //Styling
-import {
-  ListItem,
-  Text,
-  Right,
-  Button,
-  Body,
-  Left,
-  Icon,
-  Thumbnail,
-} from "native-base";
-import { ThumbnailStyled } from "./styles";
+import { Text, Right, Button, Body, Left, Icon } from "native-base";
+import { ThumbnailStyled, ListItemStyled } from "./styles";
 
-const FlightItem = ({ flight }) => {
+const FlightItem = ({ flight, selectedFlight, handleSelect }) => {
   const dispatch = useDispatch();
   const stringTime = (time) => {
     let hrs = Math.floor(time);
@@ -24,7 +15,7 @@ const FlightItem = ({ flight }) => {
   };
   const stringDate = (date) => date.split("-").reverse().join("/");
   return (
-    <ListItem thumbnail>
+    <ListItemStyled thumbnail selected={selectedFlight == flight.id}>
       <Right>
         <Text>{flight.name}</Text>
         <ThumbnailStyled
@@ -33,7 +24,7 @@ const FlightItem = ({ flight }) => {
             uri: flight.airlines.logo,
           }}
         />
-        <Button primary>
+        <Button onPress={() => handleSelect(flight.id)}>
           <Text>Select</Text>
         </Button>
       </Right>
@@ -45,7 +36,7 @@ const FlightItem = ({ flight }) => {
             {stringTime(flight.arrivalTime)}
           </Text>
           <Text note>
-            <Icon type="feather" name="calendar" />{" "}
+            <Icon type="Feather" name="calendar" />{" "}
             {stringDate(flight.departureDate)}
           </Text>
           <Text note>
@@ -57,7 +48,7 @@ const FlightItem = ({ flight }) => {
           <Text>Starting From: {flight.economyPrice} BD</Text>
         </Body>
       </Left>
-    </ListItem>
+    </ListItemStyled>
   );
 };
 
