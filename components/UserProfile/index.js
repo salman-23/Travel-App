@@ -2,53 +2,70 @@ import React from 'react';
 import { Spinner, Button, Icon } from 'native-base';
 import { useSelector } from 'react-redux';
 import { StyleSheet, Text, View, Image } from 'react-native';
-
+import { useDispatch } from 'react-redux';
+import { history } from '../../store/actions/authActions';
+//Styles
+import { AButton, ButtonText } from './styles';
 const UserProfile = ({ navigation }) => {
+	const dispatch = useDispatch();
 	const profile = useSelector((state) => state.authReducer.profile);
 	const loading = useSelector((state) => state.authReducer.loading);
 	console.error(profile);
 	if (loading) return <Spinner />;
+	const handle = () => {
+		dispatch(history());
+		navigation.navigate('OrderHistory');
+	};
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.header}>
-				<View style={styles.headerContent}>
-					<Image
-						style={styles.avatar}
-						source={{
-							uri: 'https://bootdey.com/img/Content/avatar/avatar6.png',
-						}}
-					/>
-
-					<Text style={styles.name}>
-						{profile.firstName} {profile.lastName}{' '}
-					</Text>
-					<Text style={styles.userInfo}>{profile.email} </Text>
-					<Text style={styles.userInfo}>Florida </Text>
-					<Button iconLeft light onPress={() => navigation.navigate('Signup')}>
-						<Icon name="cog" />
-						<Text>Edit </Text>
-					</Button>
-				</View>
-			</View>
-
-			<View style={styles.body}>
-				<View style={styles.item}>
-					<View style={styles.iconContent}>
+		<>
+			<View style={styles.container}>
+				<View style={styles.header}>
+					<View style={styles.headerContent}>
 						<Image
-							style={styles.icon}
+							style={styles.avatar}
 							source={{
-								uri:
-									'https://thumbs.dreamstime.com/b/untitled-passport-vector-icon-145316830.jpg',
+								uri: 'https://bootdey.com/img/Content/avatar/avatar6.png',
 							}}
 						/>
-					</View>
-					<View style={styles.infoContent}>
-						<Text style={styles.info}>{profile.passport}</Text>
+
+						<Text style={styles.name}>
+							{profile.firstName} {profile.lastName}{' '}
+						</Text>
+						<Text style={styles.userInfo}>{profile.email} </Text>
+						<Text style={styles.userInfo}>Florida </Text>
+						<Button
+							iconLeft
+							light
+							onPress={() => navigation.navigate('Signup')}
+						>
+							<Icon name="cog" />
+							<Text>Edit </Text>
+						</Button>
 					</View>
 				</View>
+
+				<View style={styles.body}>
+					<View style={styles.item}>
+						<View style={styles.iconContent}>
+							<Image
+								style={styles.icon}
+								source={{
+									uri:
+										'https://thumbs.dreamstime.com/b/untitled-passport-vector-icon-145316830.jpg',
+								}}
+							/>
+						</View>
+						<View style={styles.infoContent}>
+							<Text style={styles.info}>{profile.passport}</Text>
+						</View>
+					</View>
+					<AButton full light onPress={handle}>
+						<ButtonText>Order History</ButtonText>
+					</AButton>
+				</View>
 			</View>
-		</View>
+		</>
 	);
 };
 
