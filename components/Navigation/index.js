@@ -10,6 +10,7 @@ import Logout from "../buttons/Logout";
 import FlightSearch from "../FlightSearch";
 import FlightList from "../FlightList";
 import Roundtrip from "../FlightList/Roundtrip";
+import BookingForm from "../BookingForm";
 
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
@@ -43,6 +44,7 @@ const RootNavigator = () => {
         <Screen name="FlightSearch" component={FlightSearch} />
         <Screen name="FlightList" component={FlightList} />
         <Screen name="ReturnFlights" component={Roundtrip} />
+        <Screen name="Booking" component={BookingForm} />
 
         <Screen
           name="Signin"
