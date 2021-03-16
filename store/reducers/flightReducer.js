@@ -3,7 +3,7 @@ import { FETCH_FLIGHTS } from "../actions/types";
 const initialState = {
   flights: [],
   returnFlights: [],
-  loading: true,
+  flightsLoading: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         flights: action.payload.flights,
         returnFlights: action.payload.returnFlights,
-        loading: false,
+        flightsLoading: false,
       };
     default:
       return state;

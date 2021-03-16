@@ -1,10 +1,18 @@
-//User
+//USER
 export const SET_USER = "SET_USER";
 export const FETCH_PROFILE = "FETCH_PROFILE";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
-//Destinations
+
+//DESTINATIONS
 export const FETCH_DESTINATIONS = "FETCH_DESTINATIONS";
-//Flights
+
+//FLIGHTS
 export const FETCH_FLIGHTS = "FETCH_FLIGHTS";
+
 //BOOKING
 export const CREATE_BOOKING = "CREATE_BOOKING";
+export const SET_DETAILS = "SET_DETAILS";
+export const SET_FLIGHTS = "SET_FLIGHTS";
+
+//TRAVELCLASSES
+export const FETCH_TRAVELCLASSES = "FETCH_TRAVELCLASSES";
