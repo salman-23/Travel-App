@@ -4,7 +4,12 @@ import { useDispatch } from "react-redux";
 import { Text, Right, Button, Body, Left, Icon } from "native-base";
 import { ThumbnailStyled, ListItemStyled } from "./styles";
 
-const FlightItem = ({ flight, selectedFlight, handleSelect }) => {
+const FlightItem = ({
+  flight,
+  selectedFlight,
+  handleSelect,
+  travelClassId,
+}) => {
   const dispatch = useDispatch();
   const stringTime = (time) => {
     let hrs = Math.floor(time);
@@ -31,21 +36,25 @@ const FlightItem = ({ flight, selectedFlight, handleSelect }) => {
       <Left>
         <Body>
           <Text note>
-            <Icon type="Feather" name="clock" />{" "}
-            {stringTime(flight.departureTime)} -{" "}
-            {stringTime(flight.arrivalTime)}
+            <Icon type="Feather" name="clock" />
+            {` ${stringTime(flight.departureTime)} ${stringTime(
+              flight.arrivalTime
+            )}`}
           </Text>
           <Text note>
-            <Icon type="Feather" name="calendar" />{" "}
-            {stringDate(flight.departureDate)}
+            <Icon type="Feather" name="calendar" />
+            {` ${stringDate(flight.departureDate)}`}
           </Text>
           <Text note>
             <Icon type="MaterialCommunityIcons" name="airplane" />
-            {flight.origin.airport}-({flight.origin.code}) to{" "}
-            {flight.destination.airport}-({flight.destination.code})
+            {` ${flight.origin.airport}-(${flight.origin.code}) to ${flight.destination.airport}-(${flight.destination.code})`}
           </Text>
           <Text note>{flight.airlines.name}</Text>
-          <Text>Starting From: {flight.economyPrice} BD</Text>
+          <Text>
+            {travelClassId === 1
+              ? `Economy Price: ${flight.economyPrice} BD per passenger`
+              : `Business Price: ${flight.businessPrice} BD per passenger`}
+          </Text>
         </Body>
       </Left>
     </ListItemStyled>
