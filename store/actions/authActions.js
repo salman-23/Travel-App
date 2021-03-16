@@ -79,7 +79,6 @@ export const profile = (userId) => async (dispatch) => {
 export const updateProfile = (user, navigation) => async (dispatch) => {
   try {
     await instance.put(`/user/Updateprofile`, user);
-    console.log(user);
     dispatch({
       type: types.UPDATE_PROFILE,
       payload: user,
