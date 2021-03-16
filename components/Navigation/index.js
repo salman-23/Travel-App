@@ -15,10 +15,6 @@ import OrderHistory from "../OrderHistory";
 
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
-  const { flights, flightsLoading, returnFlights, roundtrip } = useSelector(
-    (state) => state.flightReducer
-  );
-  const bookedFlights = useSelector((state) => state.bookingReducer.flights);
   return (
     <>
       <Navigator

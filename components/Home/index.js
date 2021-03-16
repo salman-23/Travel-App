@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   HomeBackground,
   TopStyling,
-  Title,
   BottomStyling,
   ButtonStyled,
 } from "./styles";

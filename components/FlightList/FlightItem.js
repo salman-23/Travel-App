@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 //Styling
 import { Text, Right, Button, Body, Left, Icon } from "native-base";
 import { ThumbnailStyled, ListItemStyled } from "./styles";
@@ -10,7 +9,6 @@ const FlightItem = ({
   handleSelect,
   travelClassId,
 }) => {
-  const dispatch = useDispatch();
   const stringTime = (time) => {
     let hrs = Math.floor(time);
     let mins = Math.round((time % 1) * 60);

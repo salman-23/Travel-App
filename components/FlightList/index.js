@@ -13,9 +13,7 @@ const FlightList = ({ navigation, route }) => {
   const { flights, flightsLoading, returnFlights } = useSelector(
     (state) => state.flightReducer
   );
-  const bookingReducer = useSelector((state) => state.bookingReducer);
-  const { travelClassId } = bookingReducer;
-  const bookedFlights = bookingReducer.flights;
+  const { travelClassId } = useSelector((state) => state.bookingReducer);
   const dispatch = useDispatch();
   const [selectedFlight, setSelectedFlight] = useState(null);
 
