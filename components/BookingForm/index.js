@@ -10,7 +10,8 @@ import {
   AuthButton,
   AuthButtonText,
 } from "../authentication/styles";
-import { Content } from "native-base";
+import { Content, Button, Text } from "native-base";
+import { Alert } from "react-native";
 
 const BookingForm = ({ navigation }) => {
   const { user } = useSelector((state) => state.authReducer);
@@ -29,6 +30,7 @@ const BookingForm = ({ navigation }) => {
     });
   }
   const [passengers, setPassengers] = useState(initialState);
+  const [guest, setGuest] = useState(false);
 
   const handleChange = (text, name, number) => {
     let passengersArr = passengers.slice();
@@ -52,6 +54,19 @@ const BookingForm = ({ navigation }) => {
   }
   return (
     <Content>
+      {!user &&
+        !guest &&
+        Alert.alert("Continue as guest?", "You're not signed in!", [
+          {
+            text: "Sign in",
+            onPress: () => navigation.navigate("Signin", { booking: true }),
+          },
+          {
+            text: "Continue as Guest",
+            onPress: () => setGuest(true),
+            style: "cancel",
+          },
+        ])}
       <AuthContainer>
         {passengersForms}
         <AuthButton onPress={handleSubmit}>
