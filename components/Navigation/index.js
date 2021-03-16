@@ -2,14 +2,15 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 // Components
-import UserProfile from '../UserProfile';
-import Home from '../Home';
-import Signin from '../authentication/Signin';
-import Signup from '../authentication/Signup';
-import Logout from '../buttons/Logout';
-import FlightSearch from '../FlightSearch';
-import FlightList from '../FlightList';
-import Roundtrip from '../FlightList/Roundtrip';
+import UserProfile from "../UserProfile";
+import Home from "../Home";
+import Signin from "../authentication/Signin";
+import Signup from "../authentication/Signup";
+import Logout from "../buttons/Logout";
+import FlightSearch from "../FlightSearch";
+import FlightList from "../FlightList";
+import Roundtrip from "../FlightList/Roundtrip";
+import BookingForm from "../BookingForm";
 import OrderHistory from '../OrderHistory';
 
 const RootNavigator = () => {
@@ -18,7 +19,6 @@ const RootNavigator = () => {
 		(state) => state.flightReducer
 	);
 	const bookedFlights = useSelector((state) => state.bookingReducer.flights);
-
 	return (
 		<>
 			<Navigator
@@ -44,6 +44,7 @@ const RootNavigator = () => {
 				<Screen name="FlightSearch" component={FlightSearch} />
 				<Screen name="FlightList" component={FlightList} />
 				<Screen name="ReturnFlights" component={Roundtrip} />
+        <Screen name="Booking" component={BookingForm} />
 				<Screen name="OrderHistory" component={OrderHistory} />
 				<Screen
 					name="Signin"
@@ -55,7 +56,6 @@ const RootNavigator = () => {
 					component={Signup}
 					options={{ headerShown: false }}
 				/>
-
 				<Screen
 					name="UserProfile"
 					component={UserProfile}

@@ -4,33 +4,37 @@ import { useState } from "react";
 //Components
 import Loading from "../Loading";
 import FlightItem from "./FlightItem";
-import { bookingCreate } from "../../store/actions/bookingActions";
+import { chosenFlights } from "../../store/actions/bookingActions";
 //Styling
 import { List, Container, Content, Button, Text } from "native-base";
 
-const FlightList = ({ navigation }) => {
-  const dispatch = useDispatch();
-  const [selectedFlight, setSelectedFlight] = useState(null);
-  const { flights, loading, returnFlights } = useSelector(
+const Roundtrip = ({ navigation }) => {
+  const { flights, flightsLoading, returnFlights } = useSelector(
     (state) => state.flightReducer
   );
-  const { bookedFlights, bookingLoading } = useSelector(
-    (state) => state.bookingReducer
-  );
+  const bookingReducer = useSelector((state) => state.bookingReducer);
+  const { travelClassId } = bookingReducer;
+  const bookedFlights = bookingReducer.flights;
 
-  if (loading || bookingLoading) return <Loading />;
+  const dispatch = useDispatch();
+  const [selectedFlight, setSelectedFlight] = useState(null);
+
+  if (flightsLoading) return <Loading />;
 
   const handleSelect = (flightId) => setSelectedFlight(flightId);
 
-  const bookedFlight = flights.find((flight) => flight.id === bookedFlights[0]);
+  const departingFlight = flights.find(
+    (flight) => flight.id === bookedFlights.departing
+  );
 
   const handleSubmit = () => {
     dispatch(
-      bookingCreate(
+      chosenFlights(
         selectedFlight,
         navigation,
         returnFlights.length,
-        "ReturnFlights"
+        "returning",
+        route
       )
     );
     handleSelect(null);
@@ -38,14 +42,15 @@ const FlightList = ({ navigation }) => {
   const flightList = returnFlights
     .filter(
       (flight) =>
-        flight.departureDate !== bookedFlight.departureDate ||
-        +flight.departureTime >= 2 + +bookedFlight.arrivalTime
+        flight.departureDate !== departingFlight.departureDate ||
+        +flight.departureTime >= 2 + +departingFlight.arrivalTime
     )
     .map((flight) => (
       <FlightItem
         flight={flight}
         selectedFlight={selectedFlight}
         handleSelect={handleSelect}
+        travelClassId={travelClassId}
       />
     ));
 
@@ -77,4 +82,4 @@ const FlightList = ({ navigation }) => {
   );
 };
 
-export default FlightList;
+export default Roundtrip;

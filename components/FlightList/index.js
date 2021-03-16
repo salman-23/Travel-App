@@ -5,28 +5,31 @@ import { useState } from "react";
 //Components
 import Loading from "../Loading";
 import FlightItem from "./FlightItem";
-import { bookingCreate } from "../../store/actions/bookingActions";
+import { chosenFlights } from "../../store/actions/bookingActions";
 //Styling
 import { List, Container, Content, Button, Text } from "native-base";
 
-const FlightList = ({ navigation }) => {
-  const { flights, loading, returnFlights } = useSelector(
+const FlightList = ({ navigation, route }) => {
+  const { flights, flightsLoading, returnFlights } = useSelector(
     (state) => state.flightReducer
   );
-
+  const bookingReducer = useSelector((state) => state.bookingReducer);
+  const { travelClassId } = bookingReducer;
+  const bookedFlights = bookingReducer.flights;
   const dispatch = useDispatch();
   const [selectedFlight, setSelectedFlight] = useState(null);
 
-  if (loading) return <Loading />;
+  if (flightsLoading) return <Loading />;
 
   const handleSelect = (flightId) => setSelectedFlight(flightId);
   const handleSubmit = () => {
     dispatch(
-      bookingCreate(
+      chosenFlights(
         selectedFlight,
         navigation,
         returnFlights.length,
-        "FlightList"
+        "departing",
+        route
       )
     );
     handleSelect(null);
@@ -36,6 +39,7 @@ const FlightList = ({ navigation }) => {
       flight={flight}
       selectedFlight={selectedFlight}
       handleSelect={handleSelect}
+      travelClassId={travelClassId}
     />
   ));
 

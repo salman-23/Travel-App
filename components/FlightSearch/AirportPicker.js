@@ -5,12 +5,18 @@ const AirportPicker = ({ filter, setFilter, items, type }) => {
     <Picker
       mode="dropdown"
       iosIcon={<Icon name="arrow-down" />}
-      placeholder="Select your departure airport"
+      placeholder={`Select your ${
+        type === "departureAirport"
+          ? "Departure Airport"
+          : type === "arrivalAirport"
+          ? "Arrival Airport"
+          : "Travel Class"
+      } `}
       placeholderStyle={{ color: "#bfc6ea" }}
       placeholderIconColor="#007aff"
       // style={{ width: 200 }}
       selectedValue={filter[type]}
-      onValueChange={(airport) => setFilter({ ...filter, [type]: airport })}
+      onValueChange={(id) => setFilter({ ...filter, [type]: id })}
     >
       {items}
     </Picker>

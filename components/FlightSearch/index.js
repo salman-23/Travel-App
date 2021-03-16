@@ -20,22 +20,28 @@ import DateSelector from "./DatePicker";
 import Loading from "../Loading";
 import AirportPicker from "./AirportPicker";
 import { searchFlight } from "../../store/actions/flightActions";
+import { passengersDetails } from "../../store/actions/bookingActions";
 
 const FlightSearch = ({ navigation }) => {
   const { destinations, destinationLoading } = useSelector(
     (state) => state.destinationReducer
   );
+  const { travelClasses, travelClassLoading } = useSelector(
+    (state) => state.travelClassReducer
+  );
+
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({
     departureDate: "",
-    passangers: "",
+    returnDate: null,
+    passengers: "",
     departureAirport: 1,
     arrivalAirport: 3,
     roundtrip: false,
-    returnDate: null,
+    travelClassId: 1,
   });
 
-  if (destinationLoading) return <Loading />;
+  if (destinationLoading || travelClassLoading) return <Loading />;
 
   const pickerItems = destinations.map((destination) => (
     <Picker.Item
@@ -43,7 +49,12 @@ const FlightSearch = ({ navigation }) => {
       value={destination.id}
     />
   ));
+  const classPicker = travelClasses.map((travelClass) => (
+    <Picker.Item label={travelClass.type} value={travelClass.id} />
+  ));
+
   const handleSubmit = () => {
+    dispatch(passengersDetails(filter.passengers, filter.travelClassId));
     dispatch(searchFlight(filter, navigation));
   };
   return (
@@ -90,14 +101,20 @@ const FlightSearch = ({ navigation }) => {
             type="arrivalAirport"
           />
           <Text>
-            <Icon type="Ionicons" name="people" /> Passangers
+            <Icon type="Ionicons" name="people" /> Passengers
           </Text>
         </Form>
         <TextInput
-          placeholder={"Enter number of passangers"}
+          placeholder={"Enter number of passengers"}
           keyboardType="numeric"
-          onChangeText={(passangers) => setFilter({ ...filter, passangers })}
-          value={filter.passangers}
+          onChangeText={(passengers) => setFilter({ ...filter, passengers })}
+          value={filter.passengers}
+        />
+        <AirportPicker
+          filter={filter}
+          setFilter={setFilter}
+          items={classPicker}
+          type="travelClassId"
         />
         <ListItem>
           <CheckBox
