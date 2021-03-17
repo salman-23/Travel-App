@@ -15,3 +15,11 @@ export const StyledContainer = styled(Container)`
 export const ButtonTextStyled = styled(Text)`
   margin: auto;
 `;
+
+export const SearchButton = styled.TouchableOpacity`
+  align-self: stretch;
+  align-items: center;
+  padding: 20px;
+  background-color: #4552c4;
+  margin-top: 30px;
+`;
