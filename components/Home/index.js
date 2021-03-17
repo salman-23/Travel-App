@@ -1,41 +1,14 @@
 import React from 'react';
-import { Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 //Styling
 import {
 	HomeBackground,
 	TopStyling,
-	Title,
 	BottomStyling,
 	ButtonStyled,
 } from './styles';
 //Components
-import { profile } from '../../store/actions/authActions';
 
 const Home = ({ navigation }) => {
-	const dispatch = useDispatch();
-	const user = useSelector((state) => state.authReducer.user);
-	const handlePress = () => {
-		if (user) {
-			dispatch(profile());
-			navigation.navigate('UserProfile');
-		} else {
-			Alert.alert(
-				'Signin',
-				'You need to sign in before checkout',
-				[
-					{
-						text: 'Cancel',
-						onPress: () => console.log('Cancel Pressed'),
-						style: 'cancel',
-					},
-					{ text: 'Signin', onPress: () => navigation.navigate('Signin') },
-				],
-				{ cancelable: false }
-			);
-		}
-	};
-
 	return (
 		<HomeBackground
 			source={{
@@ -45,7 +18,6 @@ const Home = ({ navigation }) => {
 		>
 			<TopStyling></TopStyling>
 			<BottomStyling>
-				<ButtonStyled onPress={handlePress}>Click here</ButtonStyled>
 				<ButtonStyled onPress={() => navigation.navigate('FlightSearch')}>
 					Take a look at our flights
 				</ButtonStyled>

@@ -11,6 +11,7 @@ import FlightSearch from '../FlightSearch';
 import FlightList from '../FlightList';
 import Roundtrip from '../FlightList/Roundtrip';
 import OrderHistory from '../OrderHistory';
+import Login from '../buttons/Login';
 
 const RootNavigator = () => {
 	const { Navigator, Screen } = createStackNavigator();
@@ -38,13 +39,53 @@ const RootNavigator = () => {
 						headerStyle: {
 							backgroundColor: '#A9BAD6',
 						},
-						headerRight: () => <Logout />,
+
+						headerRight: () => <Login />,
 					}}
 				/>
-				<Screen name="FlightSearch" component={FlightSearch} />
-				<Screen name="FlightList" component={FlightList} />
-				<Screen name="ReturnFlights" component={Roundtrip} />
-				<Screen name="OrderHistory" component={OrderHistory} />
+				<Screen
+					name="FlightSearch"
+					component={FlightSearch}
+					options={{
+						headerTintColor: 'black',
+						headerStyle: {
+							backgroundColor: '#A9BAD6',
+						},
+						headerRight: () => <Login />,
+					}}
+				/>
+				<Screen
+					name="FlightList"
+					component={FlightList}
+					options={{
+						headerTintColor: 'black',
+						headerStyle: {
+							backgroundColor: '#A9BAD6',
+						},
+						headerRight: () => <Login />,
+					}}
+				/>
+				<Screen
+					name="ReturnFlights"
+					component={Roundtrip}
+					options={{
+						headerTintColor: 'black',
+						headerStyle: {
+							backgroundColor: '#A9BAD6',
+						},
+						headerRight: () => <Login />,
+					}}
+				/>
+				<Screen
+					name="OrderHistory"
+					component={OrderHistory}
+					options={{
+						headerTintColor: 'black',
+						headerStyle: {
+							backgroundColor: '#A9BAD6',
+						},
+					}}
+				/>
 				<Screen
 					name="Signin"
 					component={Signin}

@@ -10,7 +10,6 @@ const UserProfile = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const profile = useSelector((state) => state.authReducer.profile);
 	const loading = useSelector((state) => state.authReducer.loading);
-	console.error(profile);
 	if (loading) return <Spinner />;
 	const handle = () => {
 		dispatch(history());

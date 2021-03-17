@@ -27,7 +27,6 @@ export const signup = (newUser, navigation) => {
 		try {
 			const res = await instance.post('/user/signup', newUser);
 			dispatch(setUser(res.data.token));
-			console.error(res.data.token);
 			navigation.navigate('Home');
 		} catch (error) {
 			console.log(error);
@@ -79,7 +78,6 @@ export const profile = (userId) => async (dispatch) => {
 export const updateProfile = (user, navigation) => async (dispatch) => {
 	try {
 		await instance.put(`/user/Updateprofile`, user);
-		console.log(user);
 		dispatch({
 			type: types.UPDATE_PROFILE,
 			payload: user,
