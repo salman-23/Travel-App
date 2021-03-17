@@ -4,6 +4,7 @@ const initialState = {
   flights: [],
   returnFlights: [],
   flightsLoading: true,
+  roundtrip: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         flights: action.payload.flights,
         returnFlights: action.payload.returnFlights,
+        roundtrip: action.payload.roundtrip,
         flightsLoading: false,
       };
     default:
