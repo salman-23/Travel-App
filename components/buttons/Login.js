@@ -24,7 +24,10 @@ const Login = () => {
 						onPress: () => console.log('Cancel Pressed'),
 						style: 'cancel',
 					},
-					{ text: 'Signin', onPress: () => navigation.navigate('Signin') },
+					{
+						text: 'Signin',
+						onPress: () => navigation.navigate('Signin', { booking: false }),
+					},
 				],
 				{ cancelable: false }
 			);
