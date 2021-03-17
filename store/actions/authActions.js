@@ -23,16 +23,16 @@ export const signin = (user, navigation, booking) => {
 };
 
 export const signup = (newUser, navigation) => {
-  return async (dispatch) => {
-    try {
-      const res = await instance.post("/user/signup", newUser);
-      dispatch(setUser(res.data.token));
-      console.error(res.data.token);
-      navigation.navigate("Home");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+	return async (dispatch) => {
+		try {
+			const res = await instance.post('/user/signup', newUser);
+			dispatch(setUser(res.data.token));
+			navigation.navigate('Home');
+		} catch (error) {
+			console.log(error);
+		}
+	};
 };
 export const signout = () => {
   return async (dispatch) => {
@@ -80,16 +80,17 @@ export const profile = (userId) => async (dispatch) => {
 };
 
 export const updateProfile = (user, navigation) => async (dispatch) => {
-  try {
-    await instance.put(`/user/Updateprofile`, user);
-    dispatch({
-      type: types.UPDATE_PROFILE,
-      payload: user,
-    });
-    navigation.navigate("UserProfile");
-  } catch (error) {
-    console.log("ERROR: ", error);
-  }
+	try {
+		await instance.put(`/user/Updateprofile`, user);
+		dispatch({
+			type: types.UPDATE_PROFILE,
+			payload: user,
+		});
+		navigation.navigate('UserProfile');
+	} catch (error) {
+		console.log('ERROR: ', error);
+	}
+
 };
 
 export const history = () => async (dispatch) => {
