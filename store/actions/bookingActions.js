@@ -60,6 +60,6 @@ export const chosenFlights = (
     payload: { [type]: flightId },
   });
   navigation.push(
-    route.pathname === "FlightList" && roundtrip ? "ReturnFlights" : "Booking"
+    type === "departing" && roundtrip ? "ReturnFlights" : "Booking"
   );
 };

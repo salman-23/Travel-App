@@ -2,7 +2,7 @@ import { FETCH_FLIGHTS } from "../actions/types";
 
 import instance from "./instance";
 
-export const searchFlight = (filter, navigation) => {
+export const searchFlight = (filter, roundtrip, navigation) => {
   return async (dispatch) => {
     try {
       filter = {
@@ -19,6 +19,7 @@ export const searchFlight = (filter, navigation) => {
         payload: {
           flights,
           returnFlights,
+          roundtrip,
         },
       });
       navigation.push("FlightList");

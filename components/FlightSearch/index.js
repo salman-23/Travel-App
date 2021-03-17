@@ -14,7 +14,7 @@ import {
   Body,
   ListItem,
 } from "native-base";
-import { ButtonTextStyled, StyledContainer } from "./styles";
+import { ButtonTextStyled, StyledContainer, SearchButton } from "./styles";
 //Components
 import DateSelector from "./DatePicker";
 import Loading from "../Loading";
@@ -22,7 +22,13 @@ import AirportPicker from "./AirportPicker";
 import { searchFlight } from "../../store/actions/flightActions";
 import { passengersDetails } from "../../store/actions/bookingActions";
 
-const FlightSearch = ({ navigation }) => {
+const FlightSearch = ({
+  navigation,
+  selectedFlight,
+  handleSelect,
+  setQuery,
+  initialState,
+}) => {
   const { destinations, destinationLoading } = useSelector(
     (state) => state.destinationReducer
   );
@@ -54,8 +60,10 @@ const FlightSearch = ({ navigation }) => {
   ));
 
   const handleSubmit = () => {
+    if (handleSelect) handleSelect(null);
+    if (setQuery) setQuery(initialState);
     dispatch(passengersDetails(filter.passengers, filter.travelClassId));
-    dispatch(searchFlight(filter, navigation));
+    dispatch(searchFlight(filter, filter.roundtrip, navigation));
   };
   return (
     <StyledContainer>
@@ -127,11 +135,11 @@ const FlightSearch = ({ navigation }) => {
             <Text>Roundtrip</Text>
           </Body>
         </ListItem>
-        <Button onPress={handleSubmit}>
+        <SearchButton block onPress={handleSubmit}>
           <ButtonTextStyled>
-            <Icon type="AntDesign" name="search1" /> Search Flights
+            <Icon type="AntDesign" name="search1" /> Search
           </ButtonTextStyled>
-        </Button>
+        </SearchButton>
       </Content>
     </StyledContainer>
   );
