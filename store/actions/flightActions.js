@@ -12,7 +12,6 @@ export const searchFlight = (filter, navigation) => {
           ? filter.returnDate.split("/").reverse().join("-")
           : null,
       };
-      console.log(filter);
       const res = await instance.post("/flights/search", filter);
       const { returnFlights, flights } = res.data;
       await dispatch({

@@ -1,6 +1,6 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useSelector } from "react-redux";
 // Components
 import UserProfile from '../UserProfile';
 import Home from '../Home';
@@ -11,6 +11,7 @@ import FlightSearch from '../FlightSearch';
 import FlightList from '../FlightList';
 import Roundtrip from '../FlightList/Roundtrip';
 import OrderHistory from '../OrderHistory';
+import BookingForm from "../BookingForm";
 import Login from '../buttons/Login';
 
 const RootNavigator = () => {
@@ -86,11 +87,24 @@ const RootNavigator = () => {
 						},
 					}}
 				/>
-				<Screen
-					name="Signin"
-					component={Signin}
-					options={{ headerShown: false }}
+        <Screen name="Booking" 
+            component={BookingForm} 
+            options={{
+						headerTintColor: 'black',
+						headerStyle: {
+							backgroundColor: '#A9BAD6',
+						},
+					}}
 				/>
+				<Screen
+          name="Signin"
+          component={Signin}
+          options={({ route, navigation }) => {
+            return {
+              headerShown: false,
+            };
+          }}
+        />
 				<Screen
 					name="Signup"
 					component={Signup}
